@@ -7,7 +7,7 @@ package base58_test
 import (
 	"fmt"
 
-	"github.com/btcsuite/btcutil/base58"
+	"github.com/Factom-Asset-Tokens/base58"
 )
 
 // This example demonstrates how to decode modified base58 encoded data.
@@ -41,7 +41,7 @@ func ExampleEncode() {
 func ExampleCheckDecode() {
 	// Decode an example Base58Check encoded data.
 	encoded := "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
-	decoded, version, err := base58.CheckDecode(encoded)
+	decoded, version, err := base58.CheckDecode(encoded, 1)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -49,7 +49,7 @@ func ExampleCheckDecode() {
 
 	// Show the decoded data.
 	fmt.Printf("Decoded data: %x\n", decoded)
-	fmt.Println("Version Byte:", version)
+	fmt.Println("Version Byte:", version[0])
 
 	// Output:
 	// Decoded data: 62e907b15cbf27d5425399ebf6f0fb50ebb88f18

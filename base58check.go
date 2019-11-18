@@ -26,11 +26,11 @@ func checksum(input []byte) (cksum [4]byte) {
 
 // CheckEncode prepends version bytes and appends a four byte checksum.
 func CheckEncode(input []byte, version ...byte) string {
-	b := make([]byte, 0, 1+len(input)+4)
-	b = append(b, version...)
-	b = append(b, input[:]...)
-	cksum := checksum(b)
-	b = append(b, cksum[:]...)
+	b := make([]byte, len(version)+len(input)+4)
+	i := copy(b, version)
+	i += copy(b[i:], input)
+	cksum := checksum(b[:i])
+	copy(b[i:], cksum[:])
 	return Encode(b)
 }
 
